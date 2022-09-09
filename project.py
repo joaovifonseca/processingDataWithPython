@@ -19,5 +19,7 @@ cabecalhos = {
 
 dr = pd.read_csv('202201_CPGF.csv', encoding="latin-1", sep=';')
 df = pd.DataFrame(dr)
-df.columns = cabecalhos
-print(df)
+
+df['VALOR TRANSAÇÃO'] = df['VALOR TRANSAÇÃO'].str.replace(',', '').astype(float)
+df_filtro_val_trans = df.groupby('NOME ÓRGÃO')['VALOR TRANSAÇÃO'].sum()
+print(df_filtro_val_trans)
