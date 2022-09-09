@@ -1,3 +1,5 @@
+# Filtragem de Transações por Órgao Superior
+
 trans_orgaosup1 = df.loc[df['NOME ÓRGÃO SUPERIOR'] == 'Advocacia-Geral da União',['NOME ÓRGÃO SUPERIOR','CÓDIGO UNIDADE GESTORA', 'NOME UNIDADE GESTORA']]
 display(trans_orgaosup1)
 
