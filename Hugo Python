@@ -1,8 +1,8 @@
 # Filtragem de Transações por Órgao Superior
 
-trans_orgaosup1 = df.loc[df['NOME ÓRGÃO SUPERIOR'] == 'Advocacia-Geral da União',['NOME ÓRGÃO SUPERIOR','CÓDIGO UNIDADE GESTORA', 'NOME UNIDADE GESTORA']]
+trans_orgaosup1 = df.loc[df['NOME ÓRGÃO SUPERIOR'] == 'Advocacia-Geral da União',['NOME ÓRGÃO SUPERIOR','CÓDIGO UNIDADE GESTORA', 'NOME UNIDADE GESTORA']].count()
 display(trans_orgaosup1)
 
-trans_orgaosup2= df.loc[df['NOME ÓRGÃO SUPERIOR'] == 'Banco Central do Brasil - Orçamento Fiscal e ',['NOME ÓRGÃO SUPERIOR','CÓDIGO UNIDADE GESTORA', 'NOME UNIDADE GESTORA']]
+trans_orgaosup2= df.loc[df['NOME ÓRGÃO SUPERIOR'] == 'Banco Central do Brasil - Orçamento Fiscal e ',['NOME ÓRGÃO SUPERIOR','CÓDIGO UNIDADE GESTORA', 'NOME UNIDADE GESTORA']].count()
 display(trans_orgaosup2)
 
