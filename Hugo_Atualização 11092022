@@ -1,0 +1,102 @@
+import pandas as pd
+
+* # Abaixo, abertura do Arquivo 202201_CPGF.csv  "Renomeando" Variaveis/Campos com argumento "names"
+df = pd.read_csv("C:/Users/chavi/Downloads/202201_CPGF.csv", encoding = "latin1", sep =";", names = ["Cod_Orgao_Superior", "Orgao_Superior", "Cod_Orgao","Orgao", "Cod_Unid_Gestora", "Unid_Gestora","Ano_Extrato","Mes_Extrato","CPF_Portador","Portador","CPF_CNPJ_Favorecido","Favorecido", "Transacao", "Data_Transacao", "Valor_Transacao"])
+df.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8628 entries, 0 to 8627
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   Cod_Orgao_Superior   8628 non-null   int64  
+ 1   Orgao_Superior       8628 non-null   object 
+ 2   Cod_Orgao            8628 non-null   int64  
+ 3   Orgao                8628 non-null   object 
+ 4   Cod_Unid_Gestora     8628 non-null   int64  
+ 5   Unid_Gestora         8628 non-null   object 
+ 6   Ano_Extrato          8628 non-null   int64  
+ 7   Mes_Extrato          8628 non-null   int64  
+ 8   CPF_Portador         6537 non-null   object 
+ 9   Portador             8628 non-null   object 
+ 10  CPF_CNPJ_Favorecido  8628 non-null   int64  
+ 11  Favorecido           8628 non-null   object 
+ 12  Transacao            8628 non-null   object 
+ 13  Data_Transacao       6554 non-null   object 
+ 14  Valor_Transacao      8628 non-null   float64
+dtypes: float64(1), int64(6), object(8)
+memory usage: 1011.2+ KB
+--------------------------------------------------------------------------------------///-------------------------------------------------------------------------------
+* # Abaixo, pesquisa, e remoção de campos "NA"
+df.dropna(axis=0).head()
+df.isnull()
+df.fillna(0,inplace=True)
+df.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8628 entries, 0 to 8627
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   Cod_Orgao_Superior   8628 non-null   int64  
+ 1   Orgao_Superior       8628 non-null   object 
+ 2   Cod_Orgao            8628 non-null   int64  
+ 3   Orgao                8628 non-null   object 
+ 4   Cod_Unid_Gestora     8628 non-null   int64  
+ 5   Unid_Gestora         8628 non-null   object 
+ 6   Ano_Extrato          8628 non-null   int64  
+ 7   Mes_Extrato          8628 non-null   int64  
+ 8   CPF_Portador         8628 non-null   object 
+ 9   Portador             8628 non-null   object 
+ 10  CPF_CNPJ_Favorecido  8628 non-null   int64  
+ 11  Favorecido           8628 non-null   object 
+ 12  Transacao            8628 non-null   object 
+ 13  Data_Transacao       8628 non-null   object 
+ 14  Valor_Transacao      8628 non-null   float64
+dtypes: float64(1), int64(6), object(8)
+memory usage: 1011.2+ KB
+
+---------------------------------------------------------------------------///-----------------------------------------------------------------------------------------
+* # Abaixo, pesquisa de ORGAO por CODIGO ordenado de forma ascendente pelo campo VALOR TRANSACAO
+df.loc[df["Cod_Orgao_Superior"]==63000,["Cod_Orgao_Superior","Orgao_Superior","Valor_Transacao"]].sort_values(by=["Valor_Transacao"],ascending=True)
+
+Cod_Orgao_Superior	Orgao_Superior	Valor_Transacao
+17	63000	Advocacia-Geral da União	       9.00
+27	63000	Advocacia-Geral da União	      20.00
+7	  63000	Advocacia-Geral da União	      28.00
+8	  63000	Advocacia-Geral da União	      33.00
+52	63000	Advocacia-Geral da União	      35.00
+---------------------------------------------------------------------------///------------------------------------------------------------------------------------------
+* # Abaixo, mudança do tipo de dado para o campo Data_Transacao de object to_datetime
+df.info()
+df["Data_Transacao"] = pd.to_datetime(df["Data_Transacao"])
+df.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8628 entries, 0 to 8627
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype         
+---  ------               --------------  -----         
+ 0   Cod_Orgao_Superior   8628 non-null   int64         
+ 1   Orgao_Superior       8628 non-null   object        
+ 2   Cod_Orgao            8628 non-null   int64         
+ 3   Orgao                8628 non-null   object        
+ 4   Cod_Unid_Gestora     8628 non-null   int64         
+ 5   Unid_Gestora         8628 non-null   object        
+ 6   Ano_Extrato          8628 non-null   int64         
+ 7   Mes_Extrato          8628 non-null   int64         
+ 8   CPF_Portador         8628 non-null   object        
+ 9   Portador             8628 non-null   object        
+ 10  CPF_CNPJ_Favorecido  8628 non-null   int64         
+ 11  Favorecido           8628 non-null   object        
+ 12  Transacao            8628 non-null   object        
+ 13  Data_Transacao       8628 non-null   datetime64[ns]
+ 14  Valor_Transacao      8628 non-null   float64       
+dtypes: datetime64[ns](1), float64(1), int64(6), object(7)
+memory usage: 1011.2+ KB
+--------------------------------------------------------------------------------///------------------------------------------------------------------------------------
+* # Pesquisa de Cod_Orgao_Superior disponiveis
+(df["Cod_Orgao_Superior"].unique())
+array([63000, 25201, 37000, 22000, 24000, 52000, 25000, 26000, 39000,
+       30000, 81000, 36000, 41000, 35000, 32000, 53000, 44000, 40000,
+       38000, 54000, 20000], dtype=int64)
