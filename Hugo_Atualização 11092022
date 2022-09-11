@@ -1,6 +1,7 @@
 import pandas as pd
 
 * # Abaixo, abertura do Arquivo 202201_CPGF.csv  "Renomeando" Variaveis/Campos com argumento "names"
+
 df = pd.read_csv("C:/Users/chavi/Downloads/202201_CPGF.csv", encoding = "latin1", sep =";", names = ["Cod_Orgao_Superior", "Orgao_Superior", "Cod_Orgao","Orgao", "Cod_Unid_Gestora", "Unid_Gestora","Ano_Extrato","Mes_Extrato","CPF_Portador","Portador","CPF_CNPJ_Favorecido","Favorecido", "Transacao", "Data_Transacao", "Valor_Transacao"])
 df.info()
 
@@ -28,6 +29,7 @@ dtypes: float64(1), int64(6), object(8)
 memory usage: 1011.2+ KB
 --------------------------------------------------------------------------------------///-------------------------------------------------------------------------------
 * # Abaixo, pesquisa, e remoção de campos "NA"
+
 df.dropna(axis=0).head()
 df.isnull()
 df.fillna(0,inplace=True)
@@ -61,13 +63,14 @@ memory usage: 1011.2+ KB
 df.loc[df["Cod_Orgao_Superior"]==63000,["Cod_Orgao_Superior","Orgao_Superior","Valor_Transacao"]].sort_values(by=["Valor_Transacao"],ascending=True)
 
 Cod_Orgao_Superior	Orgao_Superior	Valor_Transacao
-17	63000	Advocacia-Geral da União	       9.00
-27	63000	Advocacia-Geral da União	      20.00
+17	63000	Advocacia-Geral da União	        9.00
+27	63000	Advocacia-Geral da União	       20.00
 7	  63000	Advocacia-Geral da União	      28.00
 8	  63000	Advocacia-Geral da União	      33.00
-52	63000	Advocacia-Geral da União	      35.00
+52	63000	Advocacia-Geral da União	       35.00
 ---------------------------------------------------------------------------///------------------------------------------------------------------------------------------
 * # Abaixo, mudança do tipo de dado para o campo Data_Transacao de object to_datetime
+
 df.info()
 df["Data_Transacao"] = pd.to_datetime(df["Data_Transacao"])
 df.info()
@@ -96,7 +99,50 @@ dtypes: datetime64[ns](1), float64(1), int64(6), object(7)
 memory usage: 1011.2+ KB
 --------------------------------------------------------------------------------///------------------------------------------------------------------------------------
 * # Pesquisa de Cod_Orgao_Superior disponiveis
+
 (df["Cod_Orgao_Superior"].unique())
+
 array([63000, 25201, 37000, 22000, 24000, 52000, 25000, 26000, 39000,
        30000, 81000, 36000, 41000, 35000, 32000, 53000, 44000, 40000,
        38000, 54000, 20000], dtype=int64)
+-------------------------------------------------------------------------------///--------------------------------------------------------------------------------------      
+
+* # Correção conteudo linhas campo Orgao _Superior
+
+(df["Orgao_Superior"].unique())
+
+array(['Advocacia-Geral da União',
+       'Banco Central do Brasil - Orçamento Fiscal e ',
+       'Controladoria-Geral da União',
+       'Ministério da Agricultura, Pecuária e Abastec',
+       'Ministério da Ciência, Tecnologia, Inovações ',
+       'Ministério da Defesa', 'Ministério da Economia',
+       'Ministério da Educação', 'Ministério da Infraestrutura',
+       'Ministério da Justiça e Segurança Pública',
+       'Ministério da Mulher, Família e Direitos Huma',
+       'Ministério da Saúde', 'Ministério das Comunicações',
+       'Ministério das Relações Exteriores',
+       'Ministério de Minas e Energia',
+       'Ministério do Desenvolvimento Regional',
+       'Ministério do Meio Ambiente', 'Ministério do Trabalho',
+       'Ministério do Trabalho e Emprego', 'Ministério do Turismo',
+       'Presidência da República'], dtype=object)
+       
+df["Orgao_Superior"].replace(["Banco Central do Brasil - Orçamento Fiscal e ", "Controladoria-Geral da União","Ministério da Agricultura, Pecuária e Abastec", "Ministério da Ciência, Tecnologia, Inovações " ], ["Banco Central do Brasil - Orcamento Fiscal", "Controladoria Geral da União", "Ministério da Agricultura, Pecuária e Abastecimento", "Ministério da Ciência, Tecnologia, Inovações"], inplace=True)
+(df["Orgao_Superior"].unique())
+
+array(['Advocacia-Geral da União', 'Banco Central do Brasil',
+       'Controladoria Geral da União',
+       'Ministério da Agricultura, Pecuária e Abastecimento',
+       'Ministério da Ciência, Tecnologia, Inovações',
+       'Ministério da Defesa', 'Ministério da Economia',
+       'Ministério da Educação', 'Ministério da Infraestrutura',
+       'Ministério da Justiça e Segurança Pública',
+       'Ministério da Mulher, Família e Direitos Huma',
+       'Ministério da Saúde', 'Ministério das Comunicações',
+       'Ministério das Relações Exteriores',
+       'Ministério de Minas e Energia',
+       'Ministério do Desenvolvimento Regional',
+       'Ministério do Meio Ambiente', 'Ministério do Trabalho',
+       'Ministério do Trabalho e Emprego', 'Ministério do Turismo',
+       'Presidência da República'], dtype=object)
