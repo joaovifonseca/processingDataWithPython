@@ -29,7 +29,7 @@ cabecalhos = [
 ]
 
 #%% Importando base e trasnformando em dataframe
-dr = pd.read_csv('202201_CPGF.csv', encoding="latin-1", sep=';')
+dr = pd.read_csv('dataset/202201_CPGF.csv', encoding="latin-1", sep=';')
 df = pd.DataFrame(dr)
 
 #%% Consultando a base dados
@@ -55,9 +55,9 @@ agrupamento_valor = df[['NOME_ORGAO', 'VALOR_TRANSACAO']].groupby(by='NOME_ORGAO
 agrupamento_valor_ordenado = agrupamento_valor.sort_values(by=['VALOR_TRANSACAO'], ascending=False).reset_index()
 
 sns.barplot(y="NOME_ORGAO", x="VALOR_TRANSACAO", data=agrupamento_valor_ordenado.head(10))
-
-plt.title("Ranking de Valores por Órgãos")
-plt.xlabel('Valores',fontsize=12)
+qualidade_vinhos.csv
+plt.title("Ranking de Valores por Órgãos")qualidade_vinhos.csv
+plt.xlabel('Valores',fontsize=12)qualidade_vinhos.csv
 plt.ylabel('Órgãos',fontsize=12)
 plt.show()
 

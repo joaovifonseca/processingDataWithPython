@@ -8,12 +8,13 @@ This is a temporary script file.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import math
-import seaborn as sns
+import opendatasets as opendatasets
+from sklearn.metrics import accuracy_score
 
 #%% Carregando o Dataset
 #fonte: https://www.kaggle.com/datasets/dhanushnarayananr/credit-card-fraud?resource=download
-df = pd.read_csv("card_transdata.csv")
+opendatasets.download("https://www.kaggle.com/dhanushnarayananr/credit-card-fraud")
+df = pd.read_csv("credit-card-fraud/card_transdata.csv")
 
 #%% Visualizando o Dataset
 print(df.info())
@@ -77,7 +78,7 @@ for feature, coef in zip(X.columns, clf.coef_[0].tolist()):
 print(f"Constante: {round(clf.intercept_[0], 3)}")
 
 #%% Verificando a acurácia do modelo
-from sklearn.metrics import accuracy_score
+
 
 y_train_true = y_train
 y_train_pred = clf.predict(X_train)

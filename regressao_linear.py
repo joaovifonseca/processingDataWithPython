@@ -7,11 +7,9 @@ Created on Fri Sep 16 21:48:59 2022
 
 #%% Pacotes
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 #%% Importando base
-df = pd.read_csv('qualidade_vinhos.csv')
+df = pd.read_csv('dataset/qualidade_vinhos.csv')
 
 #%% Consultando a base dados
 print(df.info())
