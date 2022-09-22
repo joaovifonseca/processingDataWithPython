@@ -31,7 +31,10 @@ Realizar testes e validar a acurácia exibida
 ## ✒️ Autores
 
 Alunos participantes do projeto
+
 Hugo Leonardo Xavier
+
 João Vitor Fonseca da Silva
+
 Vitor Renato Michelucci 
 
